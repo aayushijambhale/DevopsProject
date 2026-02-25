@@ -64,13 +64,7 @@ const ResultDisplay = ({ result }) => {
     return complexity[algorithm] || 'Unknown';
   };
 
-  const formatCipherText = (text) => {
-    const maxLength = 150;
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
-    }
-    return text;
-  };
+  // ...existing code...
 
   return (
     <div className="result-display">

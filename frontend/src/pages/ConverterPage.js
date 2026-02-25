@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import CipherSelector from '../components/CipherSelector';
 import ConverterForm from '../components/ConverterForm';
 import ResultDisplay from '../components/ResultDisplay';
+import Container from '@mui/material/Container';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import './ConverterPage.css';
 
 const ConverterPage = () => {
@@ -55,49 +58,65 @@ const ConverterPage = () => {
     }
   };
 
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: { main: '#2563eb' },
+      secondary: { main: '#7c3aed' },
+    },
+    breakpoints: {
+      values: { xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536 },
+    },
+  });
+
   return (
-    <div className="converter-page">
-      <div className="converter-container">
-        {/* Sidebar */}
-        <aside className="sidebar">
-          <CipherSelector
-            selectedCipher={selectedCipher}
-            onCipherChange={handleCipherChange}
-          />
-        </aside>
-
-        {/* Main Content */}
-        <main className="main-content">
-          <div className="content-grid">
-            {/* Left Column - Form */}
-            <div className="form-column">
-              {error && (
-                <div className="alert alert-error">
-                  <span className="alert-icon">✕</span>
-                  <div className="alert-content">
-                    <h4>Error</h4>
-                    <p>{error}</p>
-                  </div>
-                </div>
-              )}
-
-              <ConverterForm
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="md" sx={{ py: 4 }}>
+        <div className="converter-page">
+          <div className="converter-container">
+            {/* Sidebar */}
+            <aside className="sidebar">
+              <CipherSelector
                 selectedCipher={selectedCipher}
-                onConvert={handleConvert}
-                loading={loading}
+                onCipherChange={handleCipherChange}
               />
-            </div>
+            </aside>
 
-            {/* Right Column - Result */}
-            {result && (
-              <div className="result-column">
-                <ResultDisplay result={result} />
+            {/* Main Content */}
+            <main className="main-content">
+              <div className="content-grid">
+                {/* Left Column - Form */}
+                <div className="form-column">
+                  {error && (
+                    <div className="alert alert-error" role="alert">
+                      <span className="alert-icon" aria-hidden="true">✕</span>
+                      <div className="alert-content">
+                        <h4>Error</h4>
+                        <p>{error}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <ConverterForm
+                    selectedCipher={selectedCipher}
+                    onConvert={handleConvert}
+                    loading={loading}
+                  />
+                </div>
+
+                {/* Right Column - Result */}
+                {result && (
+                  <div className="result-column">
+                    <ResultDisplay result={result} />
+                  </div>
+                )}
               </div>
-            )}
+            </main>
           </div>
-        </main>
-      </div>
-    </div>
+        </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 

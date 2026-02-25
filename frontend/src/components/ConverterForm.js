@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import './ConverterForm.css';
 
 const ConverterForm = ({ selectedCipher, onConvert, loading }) => {
   const [plaintext, setPlaintext] = useState('');
   const [key, setKey] = useState('');
   const [charCount, setCharCount] = useState(0);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState('');
 
   const needsKey = ['substitution', 'vigenere', 'caesar'].includes(selectedCipher);
 
@@ -16,9 +22,17 @@ const ConverterForm = ({ selectedCipher, onConvert, loading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (plaintext.trim()) {
-      onConvert(plaintext, key || null);
+    if (!plaintext.trim()) {
+      setSnackbarMsg('Please enter text to convert.');
+      setShowSnackbar(true);
+      return;
     }
+    if (needsKey && !key.trim()) {
+      setSnackbarMsg('Please enter a key for this cipher.');
+      setShowSnackbar(true);
+      return;
+    }
+    onConvert(plaintext, key || null);
   };
 
   const handleClear = () => {
@@ -85,7 +99,7 @@ const ConverterForm = ({ selectedCipher, onConvert, loading }) => {
         <div className="form-group">
           <div className="label-row">
             <label htmlFor="key">{getKeyLabel()}</label>
-            <span className="optional">Optional</span>
+            <span className="optional">Required</span>
           </div>
           <input
             type="text"
@@ -103,13 +117,32 @@ const ConverterForm = ({ selectedCipher, onConvert, loading }) => {
       )}
 
       <div className="form-actions">
-        <button type="submit" className="btn btn-primary" disabled={loading || !plaintext.trim()} title="Convert text">
-          {loading ? <span className="loader"></span> : 'Convert'}
-        </button>
-        <button type="button" className="btn btn-secondary" onClick={handleClear} disabled={loading} title="Clear form">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={loading || !plaintext.trim() || (needsKey && !key.trim())}
+          title="Convert text"
+          startIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
+        >
+          {loading ? 'Converting...' : 'Convert'}
+        </Button>
+        <Button
+          type="button"
+          variant="outlined"
+          color="secondary"
+          onClick={handleClear}
+          disabled={loading}
+          title="Clear form"
+        >
           Clear
-        </button>
+        </Button>
       </div>
+      <Snackbar open={showSnackbar} autoHideDuration={3000} onClose={() => setShowSnackbar(false)}>
+        <MuiAlert elevation={6} variant="filled" onClose={() => setShowSnackbar(false)} severity="warning">
+          {snackbarMsg}
+        </MuiAlert>
+      </Snackbar>
     </form>
   );
 };

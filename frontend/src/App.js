@@ -47,11 +47,11 @@ function App() {
             <p><strong>Cipher Converter</strong> v1.0.0</p>
           </div>
           <div className="footer-links">
-            <a href="#" title="GitHub">GitHub</a>
+            <a href="https://github.com/aayushijambhale/DevopsProject" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
             <span>•</span>
-            <a href="#" title="Documentation">Docs</a>
+            <a href="https://aayushijambhale.github.io/DevopsProject" target="_blank" rel="noopener noreferrer" title="Documentation">Docs</a>
             <span>•</span>
-            <a href="#" title="About">About</a>
+            <button type="button" title="About" onClick={() => alert('Cipher Converter v1.0.0\nDeveloped by Aayushi Jambhale')}>About</button>
           </div>
           <p className="footer-copyright">&copy; 2026 Cipher Converter. Licensed under MIT.</p>
         </div>
