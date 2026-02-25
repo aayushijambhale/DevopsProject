@@ -1,0 +1,276 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--light-bg);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Compact Header Styles */
+.header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 16px 20px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.header-content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.header-title h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+}
+
+.header-title .subtitle {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.api-warning {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 3px solid #fbbf24;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+
+/* Alert Styles */
+.alert {
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  animation: slideInDown 0.3s ease;
+}
+
+.alert-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content h4 {
+  margin: 0 0 3px 0;
+  font-size: 0.9rem;
+}
+
+.alert-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.alert-error {
+  background: #fee2e2;
+  border-left: 3px solid var(--danger-color);
+  color: #7f1d1d;
+}
+
+.alert-warning {
+  background: #fef3c7;
+  border-left: 3px solid var(--warning-color);
+  color: #78350f;
+}
+
+.alert-success {
+  background: #dcfce7;
+  border-left: 3px solid var(--success-color);
+  color: #15803d;
+}
+
+/* Footer Styles */
+.footer {
+  background: var(--text-primary);
+  color: white;
+  padding: 24px 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.footer-content {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  text-align: left;
+  padding: 0;
+}
+
+.footer-info p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.footer-info p:first-child {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.footer-links {
+  text-align: center;
+}
+
+.footer-links a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: var(--transition);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.footer-links span {
+  color: var(--text-light);
+  margin: 0 6px;
+}
+
+.footer-copyright {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .header-title h1 {
+    font-size: 1.3rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-links {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-title h1 {
+    font-size: 1.2rem;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+
+  .header-title .subtitle {
+    display: none;
+  }
+
+  .api-warning {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .footer {
+    padding: 16px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .footer-info {
+    padding: 0;
+  }
+
+  .footer-links {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title h1 {
+    font-size: 1.1rem;
+  }
+
+  .logo-icon {
+    font-size: 1.3rem;
+  }
+
+  .footer-info p:first-child {
+    font-size: 0.9rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.75rem;
+  }
+}
